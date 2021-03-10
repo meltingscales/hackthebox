@@ -1,5 +1,18 @@
 # Recon
 
+## Versions
+
+- Apache httpd 2.4.29 ((Ubuntu))
+- Linux OS
+
+## Vuln research
+
+- <https://httpd.apache.org/security/vulnerabilities_24.html>
+
+## Web browsing
+
+### dirb http://10.10.10.28/
+
 ## nmap
 
 ### sudo nmap 10.10.10.28 -sV -sC
