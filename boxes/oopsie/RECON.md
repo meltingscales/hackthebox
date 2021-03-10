@@ -13,6 +13,49 @@
 
 ### dirb http://10.10.10.28/
 
+
+
+```
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Tue Mar  9 22:27:04 2021
+URL_BASE: http://10.10.10.28/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://10.10.10.28/ ----
+==> DIRECTORY: http://10.10.10.28/css/                                         
+==> DIRECTORY: http://10.10.10.28/fonts/                                       
+==> DIRECTORY: http://10.10.10.28/images/                                      
++ http://10.10.10.28/index.php (CODE:200|SIZE:10932)                           
+==> DIRECTORY: http://10.10.10.28/js/                                          
++ http://10.10.10.28/server-status (CODE:403|SIZE:276)                         
+==> DIRECTORY: http://10.10.10.28/themes/                                      
+==> DIRECTORY: http://10.10.10.28/uploads/                                     
+                                                                               
+---- Entering directory: http://10.10.10.28/css/ ----
+                                                                               
+---- Entering directory: http://10.10.10.28/fonts/ ----
+                                                                               
+---- Entering directory: http://10.10.10.28/images/ ----
+                                                                               
+---- Entering directory: http://10.10.10.28/js/ ----
+                                                                               
+---- Entering directory: http://10.10.10.28/themes/ ----
+                                                                               
+---- Entering directory: http://10.10.10.28/uploads/ ----
+                                                                               
+-----------------
+END_TIME: Tue Mar  9 22:42:51 2021
+
+```
+
 ## nmap
 
 ### sudo nmap 10.10.10.28 -sV -sC
