@@ -1,3 +1,10 @@
+# Recon
+
+## nmap
+
+    nmap -sS -A 10.10.10.28
+
+```
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-06 20:40 CST
 Nmap scan report for 10.10.10.28
 Host is up (0.034s latency).
@@ -34,3 +41,4 @@ HOP RTT      ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 20.34 seconds
+```
