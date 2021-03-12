@@ -1,4 +1,4 @@
-# Recon
+# Writeup
 
 ## Versions
 
@@ -23,25 +23,38 @@ Let's try going to <http://10.10.10.28/cdn-cgi/login>.
 
 I used the uname+pw `admin:MEGACORP_4dm1n!!` to get in. I got the password from the previous box, 'archetype' (as this is the starting point lab.)
 
+#### <http://10.10.10.28/cdn-cgi/login/admin.php?content=accounts&id=1>
+34322	admin	admin@megacorp.com
+
+### Cookies
+
+I realize that the HTTP requests look like this:
+
 ```
-POST /cdn-cgi/login/index.php HTTP/1.1
+GET /cdn-cgi/login/admin.php?content=accounts&id=1 HTTP/1.1
 Host: 10.10.10.28
-Content-Length: 44
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://10.10.10.28
-Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://10.10.10.28/cdn-cgi/login/index.php
+Referer: http://10.10.10.28/cdn-cgi/login/admin.php
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
+Cookie: user=34322; role=admin
 Connection: close
-
-username=admin&password=MEGACORP_4dm1n%21%21
 ```
 
-TODO post-login?
+Holy crap. There's no session token! The Cookie contains all of the User ID information!
+
+If I try to go to <http://10.10.10.28/cdn-cgi/login/admin.php?content=uploads>, I get the message,
+
+> This action require super admin rights.
+
+If I change my cookie with Burp Suite, I might be able to get different responses.
+
+I noticed that if I change the `user` cookie to something other than `34322`, I get logged out, but if I change the `role`, nothing happens.
+
+Try `
 
 ### dirb http://10.10.10.28/
 
