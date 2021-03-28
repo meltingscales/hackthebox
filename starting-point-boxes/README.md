@@ -1,0 +1,1 @@
+All starting point boxes.
