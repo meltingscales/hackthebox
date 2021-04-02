@@ -16,3 +16,8 @@ tom@rafol.co.uk
 86575
 super admin
 superadmin@megacorp.com
+password
+root
+toor
+
+anonymous

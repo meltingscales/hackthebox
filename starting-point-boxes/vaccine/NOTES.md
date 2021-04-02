@@ -132,6 +132,12 @@ superadmin@megacorp.com
 
 ...and all the permutations result in similarly-long HTTP responses, likely meaning that these creds aren't valid.
 
-## FTP brute-force
+## FTP brute-force, `ncrack`
 
-I can connect to an FTP server on 10.10.10.46, so I'll try to do credential stuff that.
+I can connect to an FTP server on 10.10.10.46, so I'll try to credential stuff that.
+
+    pushd payloads
+    ncrack -U formfuzz.txt -P formfuzz.txt ftp://10.10.10.46
+    popd
+
+It appears that `ncrack` isn't working. 
