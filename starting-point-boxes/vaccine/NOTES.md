@@ -141,3 +141,7 @@ I can connect to an FTP server on 10.10.10.46, so I'll try to credential stuff t
     popd
 
 It appears that `ncrack` isn't working. 
+
+## I am stuck 1
+
+Okay, I'm stuck and want to get more acquainted with the tools, so I'm going to just consult the guide.
