@@ -145,3 +145,19 @@ It appears that `ncrack` isn't working.
 ## I am stuck 1
 
 Okay, I'm stuck and want to get more acquainted with the tools, so I'm going to just consult the guide.
+
+They say that there is FTP, SSH, and HTTP services running, which is what I found.
+
+But then they say,
+
+> The credentials ftpuser / mc@F1l3ZilL4 can be used to login to the FTP server.
+
+Where did they get these creds from?! Maybe a brute force FTP attack?
+
+I need to consult the previous guide for 'Oopsie'.
+
+...
+
+YES, the cred was in the previous box, 'Oopsie', inside `/root/`... I guess I should have explored that.
+
+Going to get the cred from the previous box now.
