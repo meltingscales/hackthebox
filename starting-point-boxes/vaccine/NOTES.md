@@ -161,3 +161,29 @@ I need to consult the previous guide for 'Oopsie'.
 YES, the cred was in the previous box, 'Oopsie', inside `/root/`... I guess I should have explored that.
 
 Going to get the cred from the previous box now.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<FileZilla3>
+    <RecentServers>
+        <Server>
+            <Host>10.10.10.46</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>ftpuser</User>
+            <Pass>mc@F1l3ZilL4</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+        </Server>
+    </RecentServers>
+</FileZilla3>
+```
+
+Got the cred, so I can connect to FTP now.
+
+I downloaded `backup.zip` file, but it's password protected.
