@@ -197,3 +197,19 @@ And bizarrely, the password was
     741852963
 
 Apparently `rockyou.txt` has a bunch of number sequences in it.
+
+In `index.php` on line 5, we can see this:
+
+```php
+if($_POST['username'] === 'admin' && md5($_POST['password']) === "2cb42f8734ea607eefed3b70af13bbd3") {
+```
+
+This means our cred is
+
+    admin:2cb42f8734ea607eefed3b70af13bbd3
+
+And can be processed by hashcat. But first, I'm going to look it up in an online md5 database.
+
+It was `qwerty789`! Yay for laziness.
+
+    admin:qwerty789
