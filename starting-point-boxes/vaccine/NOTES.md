@@ -187,3 +187,13 @@ Going to get the cred from the previous box now.
 Got the cred, so I can connect to FTP now.
 
 I downloaded `backup.zip` file, but it's password protected.
+
+Then, I decided to try to brute-force it, but it was taking too long, so I used
+
+    fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt backup.zip
+
+And bizarrely, the password was
+
+    741852963
+
+Apparently `rockyou.txt` has a bunch of number sequences in it.
