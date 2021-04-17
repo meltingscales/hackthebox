@@ -158,6 +158,8 @@ I need to consult the previous guide for 'Oopsie'.
 
 ...
 
+## Going back for FTP creds
+
 YES, the cred was in the previous box, 'Oopsie', inside `/root/`... I guess I should have explored that.
 
 Going to get the cred from the previous box now.
@@ -188,6 +190,8 @@ Got the cred, so I can connect to FTP now.
 
 I downloaded `backup.zip` file, but it's password protected.
 
+## Wordlist zip file brute force
+
 Then, I decided to try to brute-force it, but it was taking too long, so I used
 
     fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt backup.zip
@@ -197,6 +201,8 @@ And bizarrely, the password was
     741852963
 
 Apparently `rockyou.txt` has a bunch of number sequences in it.
+
+## Hardcoded hash
 
 In `index.php` on line 5, we can see this:
 
@@ -212,4 +218,18 @@ And can be processed by hashcat. But first, I'm going to look it up in an online
 
 It was `qwerty789`! Yay for laziness.
 
-    admin:qwerty789
+    admin:qwerty789a
+
+## Logged into site
+
+The site just has this one page:
+
+- <http://10.10.10.46/dashboard.php?search=test>
+
+I need a valid PHP session ID cookie ("PHPSESSID") to send requests here, so I'm going to use `sqlmap` and pass it my authenticated PHPSESSID.
+
+```
+sqlmap http://10.10.10.46/dashboard.php?search=test --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg"
+```
+
+This doesn't return anything sadly.
