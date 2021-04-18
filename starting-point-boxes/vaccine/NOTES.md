@@ -218,7 +218,7 @@ And can be processed by hashcat. But first, I'm going to look it up in an online
 
 It was `qwerty789`! Yay for laziness.
 
-    admin:qwerty789a
+    admin:qwerty789
 
 ## Logged into site
 
