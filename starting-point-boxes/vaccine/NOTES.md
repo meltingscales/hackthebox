@@ -233,3 +233,36 @@ sqlmap http://10.10.10.46/dashboard.php?search=test --cookie="PHPSESSID=51ai5vlm
 ```
 
 This doesn't return anything sadly.
+
+Maybe I need to use IDs returned from previous lab DB dump that I did?
+
+## DB Dump IDs
+
+Going to use OWASP ZAP to fuzz the input for an HTTP POST request:
+
+```
+GET http://10.10.10.46/dashboard.php?search=@FOO@ HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+DNT: 1
+Connection: keep-alive
+Referer: https://10.10.10.46/dashboard.php
+Cookie: PHPSESSID=m0t26cnhl1iao1f9u48v2dfr80
+Upgrade-Insecure-Requests: 1
+Host: 10.10.10.46
+```
+
+TODO
+
+## Trying `dirb`
+
+Going to run `dirb` and see what directories it shows.
+
+```
+---- Scanning URL: http://10.10.10.46/ ----
++ http://10.10.10.46/index.php (CODE:200|SIZE:2312)                            
++ http://10.10.10.46/server-status (CODE:403|SIZE:276)                         
+```
+
+Nothing useful.
