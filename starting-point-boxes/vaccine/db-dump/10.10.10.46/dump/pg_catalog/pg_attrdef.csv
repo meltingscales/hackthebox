@@ -1,0 +1,3 @@
+adrelid,adbin,adnum,adsrc
+16385,{FUNCEXPR :funcid 480 :funcresulttype 23 :funcretset false :funcvariadic false :funcformat 2 :funccollid 0 :inputcollid 0 :args ({FUNCEXPR :funcid 1574 :funcresulttype 20 :funcretset false :funcvariadic false :funcformat 0 :funccollid 0 :inputcollid 0 :args ({CONST :consttype 2205 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location 65 :constvalue 4 [ 4 64 0 0 0 0 0 0 ]}) :location 57}) :location -1},1,nextval('public.cars_id_seq'::regclass)
+

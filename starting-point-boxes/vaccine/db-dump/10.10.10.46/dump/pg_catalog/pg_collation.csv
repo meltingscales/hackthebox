@@ -1,0 +1,7 @@
+collname,collctype,collowner,collcollate,collversion,collencoding,collprovider,collnamespace
+C,C,10,C,NULL,-1,c,11
+C.UTF-8,C.UTF-8,10,C.UTF-8,NULL,6,c,11
+POSIX,POSIX,10,POSIX,NULL,-1,c,11
+af-NA-x-icu,af-NA,10,af-NA,153.88.34,-1,i,11
+af-ZA-x-icu,af-ZA,10,af-ZA,153.88.34,-1,i,11
+

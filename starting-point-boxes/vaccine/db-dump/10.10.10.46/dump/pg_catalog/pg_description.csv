@@ -1,0 +1,17 @@
+objoid,classoid,objsubid,description
+11,2615,0,system catalog schema
+12,2612,0,built-in functions
+13,2612,0,dynamically-loaded C functions
+14,2612,0,SQL-language functions
+15,2617,0,equal
+16,1247,0,"boolean, 'true'/'false'"
+17,1247,0,"variable-length string, binary values escaped"
+18,1247,0,single character
+19,1247,0,63-byte type for storing system identifiers
+20,1247,0,"~18 digit integer, 8-byte storage"
+21,1247,0,"-32 thousand to 32 thousand, 2-byte storage"
+22,1247,0,"array of int2, used in system tables"
+23,1247,0,"-2 billion to 2 billion integer, 4-byte storage"
+24,1247,0,registered procedure
+25,1247,0,"variable-length string, no limit specified"
+

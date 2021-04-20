@@ -1,0 +1,7 @@
+tmplinit,tmplname,tmpllexize,tmplnamespace
+dsimple_init,simple,dsimple_lexize,11
+dsynonym_init,synonym,dsynonym_lexize,11
+dispell_init,ispell,dispell_lexize,11
+thesaurus_init,thesaurus,thesaurus_lexize,11
+dsnowball_init,snowball,dsnowball_lexize,11
+

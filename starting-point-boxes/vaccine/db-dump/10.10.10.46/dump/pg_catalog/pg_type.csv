@@ -1,0 +1,4 @@
+typrelid,typacl,typlen,typelem,typname,typsend,typtype,typalign,typarray,typbyval,typdelim,typinput,typmodin,typndims,typowner,typmodout,typoutput,typtypmod,typanalyze,typdefault,typnotnull,typreceive,typstorage,typbasetype,typcategory,typcollation,typisdefined,typnamespace,typdefaultbin,typispreferred
+0,NULL,1,0,bool,boolsend,b,c,1000,true,",",boolin,-,0,10,-,boolout,-1,-,NULL,false,boolrecv,p,0,B,0,true,11,NULL,true
+0,NULL,1,0,bool,boolsend,b,c,1000,true,",",boolin,-,0,10,-,boolout,-1,-,NULL,false,boolrecv,p,0,B,0,true,11,NULL,true
+

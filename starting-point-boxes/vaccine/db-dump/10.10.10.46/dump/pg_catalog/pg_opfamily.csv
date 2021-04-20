@@ -1,0 +1,13 @@
+opfname,opfowner,opfmethod,opfnamespace
+abstime_minmax_ops,,3580,11
+abstime_ops,10,,11
+abstime_ops,10,403,11
+aclitem_ops,10,405,11
+array_ops,10,405,11
+array_ops,10,403,11
+array_ops,10,2742,11
+bit_minmax_ops,10,3580,11
+bit_ops,10,403,11
+bool_ops,10,403,11
+bool_ops,10,405,11
+
