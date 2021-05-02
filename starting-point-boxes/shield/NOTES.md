@@ -25,7 +25,11 @@ HTTP and MySQL.
 
 Looks like IIS default page. Running `dirb`.
 
-Apparently it runs wordpress??
+Apparently it runs wordpress.
+
+Also, even though `admin` is a user on the site, `admin:qwerty789` does not work as a login.
+
+Going to wait for `dirb` to finish. Or search metasploit database for `xmlrpc.php` payloads.
 
 - <http://10.10.10.29/wordpress/>
 - <http://10.10.10.29/wordpress/wp-login.php?redirect_to=http%3A%2F%2F10.10.10.29%2Fwordpress%2Fwp-admin%2F&reauth=1>
@@ -34,3 +38,7 @@ Apparently it runs wordpress??
 
 - xmlrpc.php
 - TODO put em here
+
+## MySQL
+
+Not sure if this is the vector to pursue. The logins I found from previous boxes aren't working.
