@@ -76,9 +76,11 @@ The password ended up being `741852963`.
 
 There are 2 files inside `backup.zip`:
 
-    backup
-    ├── index.php
-    └── style.css
+```
+backup
+|-- index.php
+\-- style.css
+```
 
 ## 4. Hardcoded password hash
 
@@ -106,11 +108,11 @@ I logged into the site using `admin:qwerty789` and noticed an SQL injectable for
 
 ## 6. SQL Injection into reverse shell
 
-So I got the PHPSESSID cookie and got a reverse shell.
+So I copied the PHPSESSID cookie into my terminal, and got a reverse shell using `sqlmap` to attack the injectable form.
 
     sqlmap "http://10.10.10.46/dashboard.php?search=test" --cookie="PHPSESSID=jvf28f80n6p99j8nkfa9nq3tmm" --os-shell --random-agent
 
-I then started a new one as sqlmap's reverse shell is limited.
+I then started a new shell as sqlmap's reverse shell is limited.
 
 ### Upgrading from sqlmap reverse shell
 
