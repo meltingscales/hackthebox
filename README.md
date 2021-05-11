@@ -8,4 +8,4 @@ Work in `boxes/<NAME>` or `challenges/<NAME>`. No flags included.
 
 ## Markdown to PDF
 
-    pandoc file.md --listings -H ../../tex/listings-setup.tex -o output.pdf
+    pandoc WRITEUP.md --listings -H ../../tex/listings-setup.tex -o WRITEUP.pdf
