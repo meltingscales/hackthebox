@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "reviews",
+  "info": {
+    "name": "review",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "unique": true,
+      "default": "name",
+      "required": true,
+      "type": "string"
+    },
+    "description": {
+      "required": true,
+      "default": "description",
+      "type": "string"
+    },
+    "stars": {
+      "type": "integer",
+      "max": 5,
+      "required": true,
+      "min": 1
+    }
+  }
+}

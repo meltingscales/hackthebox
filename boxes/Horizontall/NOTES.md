@@ -129,4 +129,12 @@ strapi
 strapi@horizontall:~/myapi$ 
 ```
 
-I want to download the entirety of `~/myapi`, so let's zip it and put it in `~/myapi/public`... TODO
+I want to download the entirety of `~/myapi` to inspect it, so let's zip it and put it in `~/myapi/public`...
+
+Run in reverse shell:
+
+    pushd ~
+    zip -r myapi.zip myapi/
+    mv myapi.zip myapi/public/
+
+    # Then, visit http://api-prod.horizontall.htb/myapi.zip to download the code
