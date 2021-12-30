@@ -128,3 +128,5 @@ whoami
 strapi
 strapi@horizontall:~/myapi$ 
 ```
+
+I want to download the entirety of `~/myapi`, so let's zip it and put it in `~/myapi/public`... TODO
