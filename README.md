@@ -12,4 +12,4 @@ Work in `boxes/<NAME>` or `challenges/<NAME>`. No flags included.
     
 ## Note
 
-I use https://github.com/HenryFBP/VagrantPackerFiles/tree/master/vagrant/kali as an attack machine, and use `openvpn` to connect to the boxes on <https://hackthebox.com/>
+I use https://github.com/HenryFBP/VagrantPackerFiles/tree/master/vagrant/parrotos/ as an attack machine, and use `openvpn` to connect to the boxes on <https://hackthebox.com/>
