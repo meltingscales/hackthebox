@@ -138,3 +138,18 @@ Run in reverse shell:
     mv myapi.zip myapi/public/
 
     # Then, visit http://api-prod.horizontall.htb/myapi.zip to download the code
+
+Nothing really interesting. 
+
+Let's look in `/home/`.
+
+## User flag
+
+    /home/developer/user.txt
+
+Yay! To get system flag, we probably need to do something in `/home/developer/`... Because the `strapi` user cannot view developer's files.
+
+## System flag pls? ;_;
+
+Because I am extremely lazy, and have basically no idea how to proceed, I'm going to cheat again :)
+
