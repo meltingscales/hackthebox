@@ -60,6 +60,33 @@ In `~/Git/SecLists/Discovery/DNS/subdomains-top1million-110000.txt`, line 47093:
 
 Just a blank page that says "welcome".
 
-Time to fuzz!
+[Time to fuzz!](https://wfuzz.readthedocs.io/en/latest/user/basicusage.html)
 
-    wfuzz -w ~/Git/SecLists/Discovery/TODO TODO TODO TODO
+    wfuzz --sc 200 -w ~/Git/SecLists/Discovery/Web-Content/directory-list-1.0.txt http://api-prod.horizontall.htb/FUZZ
+
+### Results
+
+-   /reviews
+    -   Some JSON API.
+    -   Both `/reviews/1` and `/reviews?id=1` work
+-   /admin
+    -   "strapi" CMS login, redirects to `/admin/auth/login`
+
+According to the writeup I shamelessly stole the answer from, there's some RCE bug that affects the strapi CMS.
+
+So, going to see if I can find the RCE bug in MSF.
+
+## strapi RCE bug
+
+Well, I googled "MSF strapi" and found an exploit script:
+
+<https://www.exploit-db.com/exploits/50239>
+
+Didn't run it, but reading it, saw they query `/admin/init` for the version to see if the exploit would work.
+
+<http://api-prod.horizontall.htb/admin/init> returns `3.0.0-beta.17.4`:
+
+    {"data":{"uuid":"a55da3bd-9693-4a08-9279-f9df57fd1817","currentEnvironment":"development","autoReload":false,"strapiVersion":"3.0.0-beta.17.4"}}
+
+So, it's vulnerable, and we should be able to exploit this RCE bug.
+
