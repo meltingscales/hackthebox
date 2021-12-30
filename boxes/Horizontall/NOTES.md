@@ -2,9 +2,10 @@
 
 ### horizontall.htb is an invalid host
 
-Add this entry to `/etc/hosts/` (IP may be different):
+Add these entries to `/etc/hosts` (IP may be different):
 
     10.10.11.105    horizontall.htb
+    10.10.11.105    api-prod.horizontall.htb
 
 ## Recon
 
@@ -45,4 +46,20 @@ I got lazy and looked at a [writeup](https://infosecwriteups.com/horizontall-hac
 
 ## subdomain evaluation
 
+May take a while. Can use `sudo iftop -i tun0` to see how much traffic is being sent.
+
     wfuzz -w ~/Git/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -u horizontall.htb --hc 301 -v -c -H "Host:FUZZ.horizontall.htb"
+
+Request # 000047093 gives us HTTP 200.
+
+In `~/Git/SecLists/Discovery/DNS/subdomains-top1million-110000.txt`, line 47093:
+
+    api-prod
+
+## api-prod.horizontall.htb
+
+Just a blank page that says "welcome".
+
+Time to fuzz!
+
+    wfuzz -w ~/Git/SecLists/Discovery/TODO TODO TODO TODO
