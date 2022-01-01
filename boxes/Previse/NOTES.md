@@ -36,7 +36,7 @@ Created by <https://m4lwhere.org/>
 
 ### Fuzzing paths
 
-#### dirsearch.txt
+#### wfuzz dirsearch.txt
 
     wfuzz --sc 200 -w ~/Git/SecLists/Discovery/Web-Content/dirsearch.txt http://10.10.11.104/FUZZ
 
@@ -57,7 +57,7 @@ Created by <https://m4lwhere.org/>
 
 Not really useful... `config.php` returns an empty page, perhaps it would be useful later.
 
-#### directory-list-2.3-big.txt
+#### wfuzz directory-list-2.3-big.txt
 
     wfuzz --sc 200 -w ~/Git/SecLists/Discovery/Web-Content/directory-list-2.3-big.txt http://10.10.11.104/FUZZ
 
