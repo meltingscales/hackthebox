@@ -1,0 +1,26 @@
+Target: http://10.10.11.104/FUZZ
+Total requests: 141708
+==================================================================
+ID    Response   Lines      Word         Chars          Request    
+==================================================================
+00001:  C=302     71 L	     164 W	   2801 Ch	  "# directory-list-1.0.txt"
+00007:  C=302     71 L	     164 W	   2801 Ch	  "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"
+00003:  C=302     71 L	     164 W	   2801 Ch	  "# Copyright 2007 James Fisher"
+00009:  C=302     71 L	     164 W	   2801 Ch	  "# Suite 300, San Francisco, California, 94105, USA."
+00006:  C=302     71 L	     164 W	   2801 Ch	  "# Attribution-Share Alike 3.0 License. To view a copy of this"
+00002:  C=302     71 L	     164 W	   2801 Ch	  "#"
+00005:  C=302     71 L	     164 W	   2801 Ch	  "# This work is licensed under the Creative Commons"
+00004:  C=302     71 L	     164 W	   2801 Ch	  "#"
+00010:  C=302     71 L	     164 W	   2801 Ch	  "#"
+00008:  C=302     71 L	     164 W	   2801 Ch	  "# or send a letter to Creative Commons, 171 Second Street,"
+00011:  C=302     71 L	     164 W	   2801 Ch	  "# Unordered case-sensitive list, where entries were found"
+00012:  C=302     71 L	     164 W	   2801 Ch	  "# on at least 2 hosts.  This was the first draft of the list."
+00014:  C=302     71 L	     164 W	   2801 Ch	  "http://10.10.11.104/"
+00013:  C=302     71 L	     164 W	   2801 Ch	  "#"
+14176:  C=301      9 L	      28 W	    310 Ch	  "css"
+14495:  C=301      9 L	      28 W	    309 Ch	  "js"
+
+Total time: 0
+Processed Requests: 141708
+Filtered Requests: 141692
+Requests/sec.: 0

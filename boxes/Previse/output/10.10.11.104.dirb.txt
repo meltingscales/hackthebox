@@ -1,0 +1,33 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: output/10.10.11.104.dirb.txt
+START_TIME: Sat Jan  1 18:03:12 2022
+URL_BASE: http://10.10.11.104/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.11.104/ ----
+==> DIRECTORY: http://10.10.11.104/css/
++ http://10.10.11.104/favicon.ico (CODE:200|SIZE:15406)
++ http://10.10.11.104/index.php (CODE:302|SIZE:2801)
+==> DIRECTORY: http://10.10.11.104/js/
++ http://10.10.11.104/server-status (CODE:403|SIZE:277)
+
+---- Entering directory: http://10.10.11.104/css/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.11.104/js/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+-----------------
+END_TIME: Sat Jan  1 18:05:01 2022
+DOWNLOADED: 4612 - FOUND: 3
