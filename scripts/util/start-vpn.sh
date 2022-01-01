@@ -1,0 +1,1 @@
+sudo openvpn ~/Downloads/lab_*.ovpn
