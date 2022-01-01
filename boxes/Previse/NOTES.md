@@ -161,6 +161,14 @@ It works, I got shell! I should keep a list of different reverse shell payloads 
 
 Looks like there's a user called m4lwhere.
 
+## MySQL
+
+Note: This value
+
+    $1$🧂llol$
+
+Is used to encrypt database passwords with php `crypt` function.
+
 Also, we can now connect to the MySQL database. Look at `config.php` for creds.
 
     mysql -u root -p'mySQL_p@ssw0rd!:)'
