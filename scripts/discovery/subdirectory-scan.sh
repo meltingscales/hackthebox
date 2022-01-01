@@ -18,7 +18,7 @@ fi
 
 dirb $PROTOCOL://$TARGET    -o $OUTPUT_DIR/$TARGET.dirb.txt     >/dev/null 2>&1 & 
 
-wfuzz --sc 200 --oF $OUTPUT_DIR/$TARGET.wfuzz-directory-list-1.0.txt -w ~/Git/SecLists/Discovery/Web-Content/directory-list-1.0.txt $PROTOCOL://$TARGET/FUZZ    >/dev/null 2>&1 &
+wfuzz --hc 404 -f $OUTPUT_DIR/$TARGET.wfuzz-directory-list-1.0.txt -w ~/Git/SecLists/Discovery/Web-Content/directory-list-1.0.txt $PROTOCOL://$TARGET/FUZZ    >/dev/null 2>&1 &
 
 FAIL=0
 
