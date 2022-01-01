@@ -25,3 +25,6 @@ Probably try cred stuffing?
     
 Apparently it worked. `admin:asdfasdf`. Wow!
 
+## Next steps
+
+We have access to the admin interface. Looks like there's a few other users, a way to upload files, and a way to view who downloaded files.
