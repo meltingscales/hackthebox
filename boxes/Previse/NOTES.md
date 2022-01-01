@@ -188,3 +188,4 @@ Also, we can now connect to the MySQL database. Look at `config.php` for creds.
 ### Cracking mysql hashes
 
     john downloaded-files/hashes.mysql.txt
+    john downloaded-files/hashes.mysql.txt --show
