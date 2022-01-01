@@ -5,7 +5,7 @@
 
 ## Recon
 
-    bash ../../scripts/discovery/first-scan.sh $VICTIM
+    bash ../../scripts/discovery/first-scan.sh $VICTIM > recon.txt
 
 Looks like port 22 and 80 are open.
 

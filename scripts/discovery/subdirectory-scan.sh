@@ -28,8 +28,7 @@ echo "wait on job $job"
     wait $job || let "FAIL+=1" #wait for it to exit, or, if it exits non-zero, increment FAIL
 done
 
-if [ "$FAIL" == "0" ]; # did 1 job tail?
-then
+if [ "$FAIL" == "0" ]; then
     echo "Done!"
 else
     echo "Failed! ($FAIL jobs)"
