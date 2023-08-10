@@ -1,0 +1,13 @@
+POST / HTTP/1.1
+Host: 94.237.58.6:35591
+Content-Length: 37
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: http://94.237.58.6:35591
+Referer: http://94.237.58.6:35591/
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Connection: close
+
+{"username":"potato","password":":3"}

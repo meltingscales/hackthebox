@@ -1,3 +1,4 @@
 *.out
 hydra.restore
 .idea/
+*.dmp
