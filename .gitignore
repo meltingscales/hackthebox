@@ -2,3 +2,4 @@
 hydra.restore
 .idea/
 *.dmp
+~$.*
