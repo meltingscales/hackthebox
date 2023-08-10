@@ -1,0 +1,1 @@
+hashcat -m 0 -a 0 d47858673d7d8424c3dac8c4ba932dde
