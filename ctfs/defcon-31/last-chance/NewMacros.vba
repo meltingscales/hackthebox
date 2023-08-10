@@ -102,9 +102,14 @@ Function Run()
     Dim dec
     dec = decodeHex(s)
 
+    fullyDecoded = " "
+
     For Each i In dec
         stm.WriteByte i
+        fullyDecoded = fullyDecoded & i & " "
     Next i
+
+    MsgBox (fullyDecoded)
 
     stm.Position = 0
 
