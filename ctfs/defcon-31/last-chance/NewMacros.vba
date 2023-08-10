@@ -109,7 +109,7 @@ Function Run()
         fullyDecoded = fullyDecoded & i & " "
     Next i
 
-    MsgBox (fullyDecoded)
+    WScript.Echo(fullyDecoded)
 
     stm.Position = 0
 
