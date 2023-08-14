@@ -45,4 +45,9 @@ We can try to crack the KeePass file with Hashcat.
     hashcat -h | grep KeePass
     hashcat -m 13400 -a 0 -w 1 passcodes.hash /usr/share/wordlists/rockyou.txt
 
-    Exhausted keyspace! It's not in `rockyou.txt`.
+Exhausted keyspace! It's not in `rockyou.txt`.
+
+I cheated a bit. Apparently I need to search the memory dump for these non-ASCII symbols:
+
+    æ
+    ø
