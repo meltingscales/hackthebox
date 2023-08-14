@@ -4,4 +4,4 @@
 
 target=$1
 
-nmap -sC -sV $1
+nmap -sC -sV -Pn $1
