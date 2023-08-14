@@ -61,3 +61,25 @@ TODO:
 Okay. Maybe " CVE-2023-32784 " is related?
 
 https://github.com/vdohney/keepass-password-dumper ?
+
+Well, we get:
+
+    dotnet run .\KeePassDumpFull.dmp
+
+    Combined: *{,, l, `, -, ', ], A, I, :, =, _, c, M}dgr*d med fl*de
+
+    Danish red berry pudding? `Rødgrød med fløde`?
+
+    Rødgrød med fløde
+    rødgrødmedfløde
+    RødgrødMedFløde
+    rodgrodmedflode
+    r*dgr*dmedfl*de
+    Rød grød med fløde
+    rød grød med fløde
+    m*dgr*dmedfl*de
+
+
+None of those work. I want to mutate the wordlist `wordlist-berry-pudding.txt`.
+
+    hashcat -m 13400 -a 0 -r rules --debug-mode=1 passcodes.hash wordlist-berry-pudding.txt
