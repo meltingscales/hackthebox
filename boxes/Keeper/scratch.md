@@ -51,3 +51,9 @@ I cheated a bit. Apparently I need to search the memory dump for these non-ASCII
 
     æ
     ø
+
+TODO: 
+
+    https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools#install-debugging-tools-for-windows
+
+    https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/
