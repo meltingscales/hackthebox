@@ -57,3 +57,7 @@ TODO:
     https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools#install-debugging-tools-for-windows
 
     https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/
+
+Okay. Maybe " CVE-2023-32784 " is related?
+
+https://github.com/vdohney/keepass-password-dumper ?
