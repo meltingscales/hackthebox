@@ -36,3 +36,11 @@ Broken pipe. Let's try something else.
     python -m http.server
     <visit http://tickets.keeper.htb:8000/ >
     
+
+Now we have a `.dmp` and a KeePass file.
+
+We can try to crack the KeePass file with Hashcat.
+
+    keepass2john passcodes.kdbx > passcodes.hash
+    hashcat -h | grep KeePass
+    hashcat -m 13400 -a 0 -w 1 passcodes.hash /usr/share/wordlists/rockyou.txt
