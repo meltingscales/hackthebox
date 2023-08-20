@@ -1,0 +1,49 @@
+Pilgrimage image shrinking service initial commit.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Author:    emily <emily@pilgrimage.htb>
+#
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   assets/bulletproof.php
+#	new file:   assets/css/animate.css
+#	new file:   assets/css/custom.css
+#	new file:   assets/css/flex-slider.css
+#	new file:   assets/css/fontawesome.css
+#	new file:   assets/css/owl.css
+#	new file:   assets/css/templatemo-woox-travel.css
+#	new file:   assets/images/banner-04.jpg
+#	new file:   assets/images/cta-bg.jpg
+#	new file:   assets/js/custom.js
+#	new file:   assets/js/isotope.js
+#	new file:   assets/js/isotope.min.js
+#	new file:   assets/js/owl-carousel.js
+#	new file:   assets/js/popup.js
+#	new file:   assets/js/tabs.js
+#	new file:   assets/webfonts/fa-brands-400.ttf
+#	new file:   assets/webfonts/fa-brands-400.woff2
+#	new file:   assets/webfonts/fa-regular-400.ttf
+#	new file:   assets/webfonts/fa-regular-400.woff2
+#	new file:   assets/webfonts/fa-solid-900.ttf
+#	new file:   assets/webfonts/fa-solid-900.woff2
+#	new file:   assets/webfonts/fa-v4compatibility.ttf
+#	new file:   assets/webfonts/fa-v4compatibility.woff2
+#	new file:   dashboard.php
+#	new file:   index.php
+#	new file:   login.php
+#	new file:   logout.php
+#	new file:   magick
+#	new file:   register.php
+#	new file:   vendor/bootstrap/css/bootstrap.min.css
+#	new file:   vendor/bootstrap/js/bootstrap.min.js
+#	new file:   vendor/jquery/jquery.js
+#	new file:   vendor/jquery/jquery.min.js
+#	new file:   vendor/jquery/jquery.min.map
+#	new file:   vendor/jquery/jquery.slim.js
+#	new file:   vendor/jquery/jquery.slim.min.js
+#	new file:   vendor/jquery/jquery.slim.min.map
+#
