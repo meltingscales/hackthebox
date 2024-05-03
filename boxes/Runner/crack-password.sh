@@ -1,0 +1,1 @@
+hashcat -m 3200 hashes.txt

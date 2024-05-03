@@ -1,0 +1,6 @@
+ID, USERNAME, PASSWORD, NAME, EMAIL, LAST_LOGIN_TIMESTAMP, ALGORITHM
+1, admin, $2a$07$neV5T/BlEDiMQUs.gM1p4uYl8xl8kvNUo4/8Aja2sAWHAQLWqufye, John, john@runner.htb, 1714717246702, BCRYPT
+2, matthew, $2a$07$q.m8WQP8niXODv55lJVovOmxGtg6K/YPHbD48/JQsdGLulmeVo.Em, Matthew, matthew@runner.htb, 1709150421438, BCRYPT
+11, city_adminnril, $2a$07$0KylRUXHSSIX5yYrwm1sFetWlsA36.24t0wxsnEWbbNe4xwPTgOS6, , angry-admin@funnybunny.org, , BCRYPT
+12, admin.sje1, $2a$07$51c2ii4aISRWKymczTjR6OnAuQPP.LBdMMTeoXGIRQ802yx.VZtFu, , admin.SJE1@lol.omg, 1714716016516, BCRYPT
+13, h454nsec8764, $2a$07$IsuAx6QWIXth3/syA0cTJ.Hk5la8j1fvG84RhJiKCcI.VrUjnDbW6, , "", 1714717303563, BCRYPT
