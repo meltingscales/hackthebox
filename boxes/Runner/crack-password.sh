@@ -1,1 +1,1 @@
-hashcat -m 3200 hashes.txt
+hashcat --custom-charset1=?l?d?u -m 3200 -a 3 hashes.txt ?1?1?1?1?1?1?1?1
