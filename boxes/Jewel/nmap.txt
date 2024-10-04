@@ -1,0 +1,11 @@
+┌─[user@parrot]─[~]
+└──╼ $sudo nmap -sS -sV jewel.htb
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-04 19:27 UTC
+Nmap scan report for jewel.htb (10.10.10.211)
+Host is up (0.032s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+8000/tcp open  http    Apache httpd 2.4.38
+8080/tcp open  http    nginx 1.14.2 (Phusion Passenger 6.0.6)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
