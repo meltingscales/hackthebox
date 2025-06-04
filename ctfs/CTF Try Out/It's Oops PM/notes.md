@@ -1,3 +1,4 @@
+```
 ┌─[user@parrot]─[~/Git]
 └──╼ $nc 94.237.54.54 45594
 The input must be a binary signal of 16 bits.
@@ -7,3 +8,12 @@ Error : Invalid length of bits.
 
 Input : 1000000000010000
 Output: 1100001110110000
+```
+
+
+# Notes
+
+## 10
+
+10 = `0000000000001010` crashes it?
+
