@@ -30,6 +30,7 @@ def probe_host(ip, port, number):
 
         i=number
 
+        # slurp buffer and discard it, we don't care about the contents before
         foo = s.recv(1024)
         
         binary_input = number_to_bstring(i)  # Format as 16-bit binary
@@ -62,17 +63,20 @@ if __name__ == "__main__":
     for i_int in range(0, ((2**16)-1), 1):
         i_binary = number_to_bstring(i_int)
 
-        response_binary = probe_host(IP, PORT, i_int)
-
-        while (response_binary == ''):
-            print("WARN empty response for "+str(i_int))
-            log_message(i_int, -1, now(), "EMPTY RESPONSE for i")
-            ml.print_latest_entry()
-            # retry
+        if not ml.do_we_have_i(i_int):
             response_binary = probe_host(IP, PORT, i_int)
 
+            while (response_binary == ''):
+                print("WARN empty response for "+str(i_int))
+                log_message(i_int, -1, now(), "EMPTY RESPONSE for i")
+                print(ml.get_latest_entry())
+                # retry
+                response_binary = probe_host(IP, PORT, i_int)
 
-        response_int = bstring_to_number(response_binary)
 
-        log_message(i_int, response_int, now())
-        ml.print_latest_entry()
+            response_int = bstring_to_number(response_binary)
+
+            log_message(i_int, response_int, now())
+            print(ml.get_latest_entry())
+        else:
+            print("Already recorded "+str(i_int))
