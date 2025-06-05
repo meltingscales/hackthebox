@@ -5,10 +5,10 @@ import pymongo
 
 
 class MongoLogger():
-    def __init__(self):
+    def __init__(self, dbname, colname):
         self.client = pymongo.MongoClient(MONGO_CSTR)
-        self.db = self.client["itsoopspm"]
-        self.col = self.db['tcp_dump']
+        self.db = self.client[dbname]
+        self.col = self.db[colname]
 
     def log(self, msg: dict):
         self.col.insert_one(msg)
