@@ -1,9 +1,11 @@
-IP="94.237.54.54"
-PORT=45594
-
+IP="94.237.58.82"
+PORT=54183
 
 import socket
 import time 
+from mongologger import MongoLogger
+
+ml = MongoLogger()
 
 def now()->float:
     return time.time()
@@ -42,9 +44,8 @@ def probe_host(ip, port, number):
         return output
 
 
-LOG=[]
 def log_message(i:int, response:int, timestamp, message=None):
-    LOG.append(
+    ml.log(
         {
             "i (int)": i,
             "i (binary)": number_to_bstring(i),
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         while (response_binary == ''):
             print("WARN empty response for "+str(i_int))
             log_message(i_int, -1, now(), "EMPTY RESPONSE for i")
-            print(LOG[-1])
+            ml.print_latest_entry()
             # retry
             response_binary = probe_host(IP, PORT, i_int)
 
@@ -74,4 +75,4 @@ if __name__ == "__main__":
         response_int = bstring_to_number(response_binary)
 
         log_message(i_int, response_int, now())
-        print(LOG[-1])
+        ml.print_latest_entry()
