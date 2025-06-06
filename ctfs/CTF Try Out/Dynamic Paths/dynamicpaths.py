@@ -1,41 +1,45 @@
-'''
-    You will be given a number of t = 100 grids for the different regions you need to pass. For every map you will have the below values:
-        1. The dimensions i x j of the map grid where 2 <= i, j <= 100
-        2. The numbers n_i,j symbolizing the distances between the blocks where 1 <= n_i,j <= 50
-    You will start at the top left element, and your goal is to reach the bottom right, while only being allowed to move down or right, minimizing the sum of the numbers you pass. Provide the minimum sum.
+"""
+You will be given a number of t = 100 grids for the different regions you need to pass. For every map you will have the below values:
+    1. The dimensions i x j of the map grid where 2 <= i, j <= 100
+    2. The numbers n_i,j symbolizing the distances between the blocks where 1 <= n_i,j <= 50
+You will start at the top left element, and your goal is to reach the bottom right, while only being allowed to move
+down or right, minimizing the sum of the numbers you pass. Provide the minimum sum.
 
-    Example Question:
-        4 3
-        2 5 1 9 2 3 9 1 3 11 7 4
-
-    This generates the following grid:
-        2 5 1
-        9 2 3
-        9 1 3
-        11 7 4
-
-    Example Response:
-        17
-    (Optimal route is 2 -> 5 -> 2 -> 1 -> 3 -> 4)
-'''
-
-sample_input = '''Test 1/100
+Example Question:
     4 3
-    2 5 1 9 2 3 9 1 3 11 7 4'''
+    2 5 1 9 2 3 9 1 3 11 7 4
+
+This generates the following grid:
+    2 5 1
+    9 2 3
+    9 1 3
+    11 7 4
+
+Example Response:
+    17
+(Optimal route is 2 -> 5 -> 2 -> 1 -> 3 -> 4)
+"""
+
+sample_input = """Test 1/100
+    4 3
+    2 5 1 9 2 3 9 1 3 11 7 4"""
 
 from pprint import pprint
 
+
 class InputData(object):
     def __init__(self, test_number_raw, i, j, values):
-        self.test_number_high = test_number_raw.split('/')[1].strip()
-        self.test_number_low = test_number_raw.split('/')[0].strip().replace('Test ', '')
+        self.test_number_high = test_number_raw.split("/")[1].strip()
+        self.test_number_low = (
+            test_number_raw.split("/")[0].strip().replace("Test ", "")
+        )
         self.i = i
         self.j = j
         self.values = values
 
     def __repr__(self):
         return f"InputData(test_number={self.test_number_low}/{self.test_number_high}, i={self.i}, j={self.j}, values={self.values})"
-    
+
     def generate_grid(self):
         """Generates a 2D grid from the values."""
         if len(self.values) != self.i * self.j:
@@ -52,31 +56,58 @@ class InputData(object):
         grid = []
         index = 0
         for _ in range(self.i):
-            row = self.values[index:index + self.j]
+            row = self.values[index : index + self.j]
             grid.append(row)
             index += self.j
         return grid
 
+    def generate_response(self):
+        """
+        Calculates the minimum path sum from top-left to bottom-right
+        in a grid, moving only right or down.
+        This uses a dynamic programming approach.
+        """
+        grid = self.generate_grid()
+        if not grid or not grid[0]:
+            return 0
 
+        rows = self.i
+        cols = self.j
+
+        # The grid itself will be used as the DP table to save space.
+
+        # Fill the first row
+        for j in range(1, cols):
+            grid[0][j] += grid[0][j - 1]
+
+        # Fill the first column
+        for i in range(1, rows):
+            grid[i][0] += grid[i - 1][0]
+
+        # Fill the rest of the grid
+        for i in range(1, rows):
+            for j in range(1, cols):
+                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1])
+
+        # The bottom-right element now holds the minimum path sum
+        return grid[rows - 1][cols - 1]
 
 
 def parse_input(input_str) -> InputData:
-    lines = input_str.strip().split('\n')        
+    lines = input_str.strip().split("\n")
 
     test_number_raw = lines[0].strip()
-    n, m = map(int, lines[1].strip().split())
+    i, j = map(int, lines[1].strip().split())
     values = list(map(int, lines[2].strip().split()))
-    return InputData(test_number_raw, n, m, values)
+    return InputData(test_number_raw, i, j, values)
 
 
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     # test 1: can parse the input correctly and generate the grid
     id = parse_input(sample_input)
-    assert id.test_number_low == '1'
-    assert id.test_number_high == '100'
+    assert id.test_number_low == "1"
+    assert id.test_number_high == "100"
     assert id.i == 4
     assert id.j == 3
     assert id.values == [2, 5, 1, 9, 2, 3, 9, 1, 3, 11, 7, 4]
