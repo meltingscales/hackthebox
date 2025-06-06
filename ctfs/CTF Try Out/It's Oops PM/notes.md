@@ -28,3 +28,16 @@ Okay! So! This is a microcomputer. I'm probably sending it opcodes!
 I need to think about what opcodes do ....stuff.
 
 EDIT: I have files in `./hardware_its_oops_pm` that I can look at now. I didn't realize this.
+
+## Cheating
+
+I'm going to look at someone else's writeup to try and understand how to complete this challenge...
+
+<https://github.com/hackthebox/business-ctf-2024/tree/main/hardware/It's%20Oops%20PM%20%5BVery%20Easy%5D>
+
+So...I just needed to read the VHDL files and understand what bit-string to send to the server.
+
+At least I wrote a MongoDB data scraper! This exercise wasn't totally useless.
+
+    nc 94.237.62.237 53428
+    1111111111101001    
