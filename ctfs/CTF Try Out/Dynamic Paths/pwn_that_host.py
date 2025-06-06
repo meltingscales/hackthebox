@@ -1,19 +1,17 @@
-# TODO use python pwntools to automate the exploit
-
 from pwn import *
 
 
-from dynamicpaths import  parse_input, InputData
+from dynamicpaths import parse_input, InputData
 from config import *
 
 if __name__ == "__main__":
-    p = remote(HOST,PORT)
-    context.log_level='info'
+    p = remote(HOST, PORT)
+    context.log_level = "info"
 
     id = None
     while True:
 
-        if id and (id.test_number_low==id.test_number_high):
+        if id and (id.test_number_low == id.test_number_high):
 
             print("We're done!")
             print(p.recvline())
@@ -24,17 +22,17 @@ if __name__ == "__main__":
         print(data)
 
         # start running tests repeatedly
-        test_number = b"Test"+p.recvline() # test number
+        test_number = b"Test" + p.recvline()  # test number
         print(test_number)
 
-        dim = p.recvline() # dimensions
+        dim = p.recvline()  # dimensions
         print(dim)
 
-        grid = p.recvline() # grid data
+        grid = p.recvline()  # grid data
         print(grid)
 
         # construct our glob of text
-        glob_of_text = b"".join([test_number,dim,grid])
+        glob_of_text = b"".join([test_number, dim, grid])
         # make it ascii
         glob_of_text = glob_of_text.decode("utf-8")
 
