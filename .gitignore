@@ -3,3 +3,7 @@ hydra.restore
 .idea/
 *.dmp
 ~$.*
+.venv/
+venv/
+env/
+__pycache__/
