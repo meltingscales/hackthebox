@@ -1,0 +1,2 @@
+ghidra-bridge==1.0.0
+jfx-bridge==1.0.0
